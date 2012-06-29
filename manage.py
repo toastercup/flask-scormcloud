@@ -9,8 +9,8 @@ from xml.dom import minidom
 # App Configuration
 
 class Config:
-    SC_APP_ID = ""
-    SC_SECRET_KEY = ""
+    SC_APP_ID = "NJOCK6FVOV"
+    SC_SECRET_KEY = "We3BMbQz0DrVQma0sbdWLyQsKKYJOz5ckOwAbe1p"
 
     SC_SERVICE_URL = "http://cloud.scorm.com/EngineWebServices"
     SC_ORIGIN = ScormCloudUtilities.get_canonical_origin_string('CareerBuilder', 'Rescare Academy Management', '1.0')
