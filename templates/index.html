@@ -1,24 +1,36 @@
 <!doctype html>
 <html>
-<head>
-    <title>Management</title>
-</head>
-<body>
-    <h1>Management</h1>
+    <head>
+        <title>Management</title>
+    </head>
+    <body>
+        <h1>Management</h1>
 
-    <h3><a href="./courselist">Course List</a></h3>
-    <h3><a href="./massapply">Mass Apply</a></h3>
+        {% if authPing %}
+            <h3><a href="./courselist">Course List</a></h3>
+            <h3><a href="./massapply">Mass Apply</a></h3>
+        {% endif %}
 
-    {% if ping %}
-        <p style="color:green">CloudPing call was successful.</p>
-    {% else %}
-        <p style="color:red">CloudPing call was not successful.</p>
-    {% endif %}
+        {% if ping %}
+            <p style="color:green">CloudPing call was successful.</p>
+        {% else %}
+            <p style="color:red">CloudPing call was not successful.</p>
+        {% endif %}
 
-    {% if authPing %}
-        <p style='color:green'>CloudAuthPing call was successful.</p>
-    {% else %}
-        <p style='color:red'>CloudAuthPing call was not successful.</p>
-    {% endif %}
-</body>
+        {% if authPing %}
+            <p style='color:green'>CloudAuthPing call was successful.</p>
+        {% else %}
+            <p style='color:red'>CloudAuthPing call was not successful.</p>
+        {% endif %}
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </body>
 </html>
