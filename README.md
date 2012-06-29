@@ -34,7 +34,7 @@ sc-flaskapp
 This web application provides a simple management frontend for Rustici's SCORM Cloud. It provides rudimentary batch operations for setting configuration values.
 
 ## Usage
-This is a Flask web app. Simply run manage.py within its directory, or use gunicorn, uWSGI or similar.
+This is a Flask web app. Please set 'SC_APP_ID' and 'SC_SECRET_KEY' in 'app_config.py'. Run 'manage.py' within its directory, or use gunicorn, uWSGI or similar.
 
 ## Dependencies
 Depends on Rustici's 'scormcloud' Python library: https://github.com/RusticiSoftware/SCORMCloud_PythonLibrary
