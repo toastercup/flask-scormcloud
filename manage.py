@@ -1,6 +1,5 @@
 from flask import Flask, flash, request, render_template
-import app_config
-import sys
+import app_config, sys
 
 
 #-----------------------------
