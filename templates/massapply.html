@@ -5,24 +5,39 @@
 
 <!doctype html>
 <html>
-<head>
-    <title>Mass Apply</title>
-</head>
-<body>
-    <h1>Mass Apply</h1>
-    <h3>Warning: This is a dangerous feature. Use with caution.</h3>
-    <form action="./" method="post">
-        <p>
-            <label for="config_element">Config Element</label>
-            {{ input('config_element') }}
+    <head>
+        <title>Mass Apply</title>
+    </head>
+    <body>
+        <h1>Mass Apply</h1>
+        <h3>Warning: This is a dangerous feature. Use with caution.</h3>
+        <p>Common config elements:
+            <ul>
+                <li>element: timeLimits, value type: int</li>
+            </ul>
         </p>
-        <p>
-            <label for="config_element_value">Config Element Value</label>
-            {{ input('config_element_value') }}
-        </p>
-        <p>
-            {{ input('submit', 'Submit', 'submit') }}
-        </p>
-    </form>
-</body>
+        <form action="./" method="POST">
+            <p>
+                <label for="config_element">Config Element</label>
+                {{ input('config_element') }}
+            </p>
+            <p>
+                <label for="config_element_value">Config Element Value</label>
+                {{ input('config_element_value') }}
+            </p>
+            <p>
+                {{ input('submit', 'Submit', 'submit') }}
+            </p>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </body>
 </html>

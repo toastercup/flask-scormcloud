@@ -1,8 +1,6 @@
-from flask import Flask, request, render_template
+from flask import Flask, flash, request, render_template
 from scormcloud.client import ScormCloudService
 from scormcloud.client import ScormCloudUtilities
-from xml.sax.saxutils import escape
-from xml.dom import minidom
 
 
 #-----------------------------
@@ -32,8 +30,17 @@ app = Flask(__name__)
 app.config.from_object(DevConfig)
 
 
-@app.route('/massapply/')
+@app.route('/massapply/', methods=['POST', 'GET'])
 def massapply():
+    if request.method == 'POST':
+        config_element = request.form['config_element']
+        config_element_value = request.form['config_element_value']
+
+        sc_course_service = Config.SC_SERVICE.get_course_service()
+        sc_courses = sc_course_service.get_course_list()
+        sc_course_count = sc_courses is not None and len(sc_courses) or 0
+
+        flash('The config settings have been applied to ' + str(sc_course_count) + ' courses.')
     return render_template('massapply.html')
 
 
