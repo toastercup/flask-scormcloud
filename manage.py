@@ -8,8 +8,8 @@ import sys
 # App Configuration
 
 class Config:
-    SC_APP_ID = ""
-    SC_SECRET_KEY = ""
+    SC_APP_ID = "NJOCK6FVOV"
+    SC_SECRET_KEY = "We3BMbQz0DrVQma0sbdWLyQsKKYJOz5ckOwAbe1p"
 
     SC_SERVICE_URL = "http://cloud.scorm.com/EngineWebServices"
     SC_ORIGIN = ScormCloudUtilities.get_canonical_origin_string('CareerBuilder', 'Rescare Academy Management', '1.0')
@@ -41,16 +41,19 @@ def massapply():
         sc_courses = sc_course_service.get_course_list()
         sc_course_count = sc_courses is not None and len(sc_courses) or 0
 
-        for sc_course in sc_courses:
-            try:
-                sc_course_service.update_attributes(courseid=sc_course.courseId, attributePairs={config_element: config_element_value})
-                flash('Course #' + sc_course.courseId + ' updated.')
-            except:
-                exception_value = str(sys.exc_info())
-                flash("Unexpected error: %s" % exception_value)
-                flash('Course #' + sc_course.courseId + ' failed.')
+        if sc_course_count > 0:
+            for sc_course in sc_courses:
+                try:
+                    sc_course_service.update_attributes(courseid=sc_course.courseId, attributePairs={config_element: config_element_value})
+                    flash('Course #' + sc_course.courseId + ' updated.')
+                except:
+                    exception_value = str(sys.exc_info())
+                    flash("Unexpected error: %s" % exception_value)
+                    flash('Course #' + sc_course.courseId + ' failed.')
+            flash('The config settings have been applied to ' + str(sc_course_count) + ' courses.', category='info')
+        else:
+            flash('No courses found.')
 
-        flash('The config settings have been applied to ' + str(sc_course_count) + ' courses.', category='info')
     return render_template('massapply.html')
 
 
@@ -66,6 +69,7 @@ def courselist():
 @app.route('/')
 def index():
     sc_debug_service = Config.SC_SERVICE.get_debug_service()
+
     return render_template('index.html', ping=sc_debug_service.ping(), authPing=sc_debug_service.authping())
 
 
