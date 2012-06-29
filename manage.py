@@ -40,7 +40,11 @@ def massapply():
         sc_courses = sc_course_service.get_course_list()
         sc_course_count = sc_courses is not None and len(sc_courses) or 0
 
-        flash('The config settings have been applied to ' + str(sc_course_count) + ' courses.')
+        for sc_course in sc_courses:
+            returnData = sc_course_service.update_attributes(courseid=sc_course.courseId, attributePairs={config_element: config_element_value})
+            flash('Course #' + sc_course.courseId + ' updated. Debug Output: ' + str(returnData))
+
+        flash('The config settings have been applied to ' + str(sc_course_count) + ' courses.', category='info')
     return render_template('massapply.html')
 
 
