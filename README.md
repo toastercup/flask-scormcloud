@@ -30,8 +30,6 @@ sc-flaskapp
 > (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 > SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-SCORM Cloud Flask App
-
 ## Description
 This web application provides a simple management frontend for Rustici's SCORM Cloud. It provides rudimentary batch operations for setting configuration values.
 
@@ -40,5 +38,5 @@ This is a Flask web app. Simply run manage.py within its directory, or use gunic
 
 ## Dependencies
 Depends on Rustici's 'scormcloud' Python library: https://github.com/RusticiSoftware/SCORMCloud_PythonLibrary
-    (Version Included: https://github.com/RusticiSoftware/SCORMCloud_PythonLibrary/tree/2355968b561a3105f44a4f2537ea5f294fd17fb7)
+
 Depends on Flask: http://flask.pocoo.org/
