@@ -1,0 +1,28 @@
+{% macro input(name, value='', type='text', size=20) -%}
+<input type="{{ type }}" id="{{ name }}" name="{{ name }}" value="{{
+        value|e }}" size="{{ size }}">
+{%- endmacro %}
+
+<!doctype html>
+<html>
+<head>
+    <title>Mass Apply</title>
+</head>
+<body>
+    <h1>Mass Apply</h1>
+    <h3>Warning: This is a dangerous feature. Use with caution.</h3>
+    <form action="./" method="post">
+        <p>
+            <label for="config_element">Config Element</label>
+            {{ input('config_element') }}
+        </p>
+        <p>
+            <label for="config_element_value">Config Element Value</label>
+            {{ input('config_element_value') }}
+        </p>
+        <p>
+            {{ input('submit', 'Submit', 'submit') }}
+        </p>
+    </form>
+</body>
+</html>
