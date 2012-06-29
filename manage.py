@@ -1,6 +1,7 @@
 from flask import Flask, flash, request, render_template
 from scormcloud.client import ScormCloudService
 from scormcloud.client import ScormCloudUtilities
+import sys
 
 
 #-----------------------------
@@ -41,8 +42,13 @@ def massapply():
         sc_course_count = sc_courses is not None and len(sc_courses) or 0
 
         for sc_course in sc_courses:
-            returnData = sc_course_service.update_attributes(courseid=sc_course.courseId, attributePairs={config_element: config_element_value})
-            flash('Course #' + sc_course.courseId + ' updated. Debug Output: ' + str(returnData))
+            try:
+                sc_course_service.update_attributes(courseid=sc_course.courseId, attributePairs={config_element: config_element_value})
+                flash('Course #' + sc_course.courseId + ' updated.')
+            except:
+                exception_value = str(sys.exc_info())
+                flash("Unexpected error: %s" % exception_value)
+                flash('Course #' + sc_course.courseId + ' failed.')
 
         flash('The config settings have been applied to ' + str(sc_course_count) + ' courses.', category='info')
     return render_template('massapply.html')
